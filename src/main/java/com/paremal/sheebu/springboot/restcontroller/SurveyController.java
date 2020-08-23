@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.paremal.sheebu.springboot.entity.User;
 import com.paremal.sheebu.springboot.model.Question;
+import com.paremal.sheebu.springboot.repository.UserRepository;
 import com.paremal.sheebu.springboot.service.SurveyService;
 
 @RestController
@@ -21,14 +23,19 @@ public class SurveyController {
 	@Autowired
 	private SurveyService surveyService;
 	
+	@Autowired
+	private UserRepository userRepo;
+	
 	@GetMapping("/surveys/{surveyId}/questions")
 	public List<Question> retrieveQuestions(@PathVariable String surveyId){
+		
 		return surveyService.retrieveQuestions(surveyId);
 	}
 	
 	@GetMapping("/surveys/{surveyId}/questions/{questionId}")
 	public Question retrieveQuestion(@PathVariable String surveyId,
 										@PathVariable String questionId) {
+		
 		return surveyService.retrieveQuestion(surveyId, questionId);
 		
 	}
@@ -41,6 +48,8 @@ public class SurveyController {
         if (createdTodo == null) {
             return ResponseEntity.noContent().build();
         }
+        
+       
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(createdTodo.getId()).toUri();
