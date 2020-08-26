@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.paremal.sheebu.springboot.entity.User;
+import com.paremal.sheebu.springboot.repository.oracle.AddressRepository;
+import com.paremal.sheebu.springboot.repository.oracle.UserRepository;
+import com.paremal.sheebu.springboot.entity.oracle.Address;
+import com.paremal.sheebu.springboot.entity.oracle.User;
 import com.paremal.sheebu.springboot.model.Question;
-import com.paremal.sheebu.springboot.repository.UserRepository;
 import com.paremal.sheebu.springboot.service.SurveyService;
 
 @RestController
@@ -26,15 +28,21 @@ public class SurveyController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private AddressRepository addressRepo;
+	
 	@GetMapping("/surveys/{surveyId}/questions")
 	public List<Question> retrieveQuestions(@PathVariable String surveyId){
-		
+		inserUser("Sheebu");
+		inserAddress("pappanoor");
 		return surveyService.retrieveQuestions(surveyId);
 	}
 	
 	@GetMapping("/surveys/{surveyId}/questions/{questionId}")
 	public Question retrieveQuestion(@PathVariable String surveyId,
 										@PathVariable String questionId) {
+		inserUser("Merin");
+		inserAddress("Meenangadi");
 		
 		return surveyService.retrieveQuestion(surveyId, questionId);
 		
@@ -56,6 +64,21 @@ public class SurveyController {
 
         return ResponseEntity.created(location).build();
 
+	}
+	
+	
+	void inserUser(String name) {
+		User user= new User();
+		user.setName(name);
+		user.setRole("Admin");
+		userRepo.save(user);
+	}
+	void inserAddress(String name) {
+		Address adr= new Address();
+		adr.setHousename(name);
+		adr.setPlace(name);
+		adr.setPostoffice(name);
+		addressRepo.save(adr);
 	}
 
 }
