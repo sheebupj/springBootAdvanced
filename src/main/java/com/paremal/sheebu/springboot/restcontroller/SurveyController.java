@@ -14,8 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.paremal.sheebu.springboot.repository.oracle.AddressRepository;
 import com.paremal.sheebu.springboot.repository.oracle.UserRepository;
+import com.paremal.sheebu.springboot.repository.oracle.UserRepository2;
 import com.paremal.sheebu.springboot.entity.oracle.Address;
 import com.paremal.sheebu.springboot.entity.oracle.User;
+import com.paremal.sheebu.springboot.entity.oracle.User2;
 import com.paremal.sheebu.springboot.model.Question;
 import com.paremal.sheebu.springboot.service.SurveyService;
 
@@ -27,6 +29,9 @@ public class SurveyController {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private UserRepository2 userRepo2;
 	
 	@Autowired
 	private AddressRepository addressRepo;
@@ -68,10 +73,10 @@ public class SurveyController {
 	
 	
 	void inserUser(String name) {
-		User user= new User();
-		user.setName(name);
-		user.setRole("Admin");
-		userRepo.save(user);
+		User2 user2= new User2();
+		user2.setName(name);
+		user2.setRole("Admin");
+		userRepo2.save(user2);
 	}
 	void inserAddress(String name) {
 		Address adr= new Address();
