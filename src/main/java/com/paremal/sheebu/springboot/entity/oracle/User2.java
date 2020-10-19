@@ -10,26 +10,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-
-
 @Entity
-@Table(name="MYUSERS1")
+@Table(name = "MYUSERS1")
 public class User2 {
 
-
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ")
-    @SequenceGenerator(sequenceName = "customer_seq", allocationSize = 1, name = "CUST_SEQ")
-     private long userId;
-	 
-	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ")
+	@SequenceGenerator(sequenceName = "customer_seq", allocationSize = 1, name = "CUST_SEQ")
+	private long userId;
+
 	private String name;
 	private String role;
-	
-	
-
-	
-
 
 	public User2(String name, String role) {
 		super();
@@ -49,9 +40,7 @@ public class User2 {
 	public String getRole() {
 		return role;
 	}
-	
 
-	
 	public void setName(String name) {
 		this.name = name;
 	}
